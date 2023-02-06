@@ -38,10 +38,10 @@ def insertion_sort(arr):
     return arr
 
 def merge(left, right, arr):
-    global comparisons
+    global comparisons # need to implement the comparison for part (c)
     
     i = j = k = 0
-    while i < len(left) and j < len(right):
+    while i < len(left) and j < len(right): # merge requires changing into the NTU algorithm perhaps
         if left[i] < right[j]:
             arr[k] = left[i]
             i += 1
@@ -60,7 +60,6 @@ def merge(left, right, arr):
 
 def pause():
     time.sleep(1)
-
 
 def main():
     i = 5
