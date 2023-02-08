@@ -76,9 +76,9 @@ def main():
     global KEY_COMPARISONS
     
     S = int(input("enter value of S: "))
-    size_of_array = 100
+    size_of_array = 1000
     
-    while size_of_array <= 10000:
+    while size_of_array <= 1000000:
         KEY_COMPARISONS = 0
         #print(f"random array generated..",end="\n")
         arr = generate_random_array(size_of_array) 
@@ -91,7 +91,7 @@ def main():
         # print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
         table.add_row([S,size_of_array,KEY_COMPARISONS])
         
-        size_of_array *=2
+        size_of_array *=10
         
 def plot_graph(table):
     X = []
@@ -102,8 +102,15 @@ def plot_graph(table):
         Y.append(row[table.field_names.index("Number Of Key Comparisons")])
     
     plt.plot(X,Y)
+    plt.xlabel("Size of array(N)")
+    plt.ylabel("Number of Key Comparisons")
+    ax = plt.gca()
+    ax.get_yaxis().get_major_formatter().set_useOffset(False)
+    ax.get_yaxis().get_major_formatter().set_scientific(False)
+    
+    ax.get_xaxis().get_major_formatter().set_useOffset(False)
+    ax.get_xaxis().get_major_formatter().set_scientific(False)
     plt.show()
-        
 
     
         
