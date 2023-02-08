@@ -69,16 +69,14 @@ def merge(left, right):
             
     return sorted_array
     
-def pause():
-    time.sleep(1)
 
-def main():
+def main(): # in this particular implementation, we fix the input size of n, and vary the size of S.
     global KEY_COMPARISONS
     
-    S = int(input("enter value of S: "))
-    size_of_array = 100
+    size_of_array = int(input("enter the value of N (Size of array): "))
+    S = 1
     
-    while size_of_array <= 10000:
+    while S <= 15:
         KEY_COMPARISONS = 0
         #print(f"random array generated..",end="\n")
         arr = generate_random_array(size_of_array) 
@@ -86,22 +84,24 @@ def main():
    
         #print("sorting the array...",end="\n")
         arr = hybrid_sort(arr,S)
-
         
-        # print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
+        #print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
         table.add_row([S,size_of_array,KEY_COMPARISONS])
         
-        size_of_array *=2
+        S +=1
         
 def plot_graph(table):
     X = []
     Y = []
     
     for row in table.rows:
-        X.append(row[table.field_names.index("Size of array (N)")])
+        X.append(row[table.field_names.index("Value of S")])
         Y.append(row[table.field_names.index("Number Of Key Comparisons")])
     
     plt.plot(X,Y)
+    plt.xlabel("Value of S")
+    plt.ylabel("Number of Key Comparisons")
+
     plt.show()
         
 
@@ -111,5 +111,5 @@ main()
 print(table)
 plot_graph(table)
 
-
-# obeservations from cheng - changing frequency of the x-axis causes a wave like property, not sure why.
+# comments by cheng
+# suppose array size of 1000
