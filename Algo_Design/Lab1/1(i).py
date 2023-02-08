@@ -1,11 +1,13 @@
 import random
 import time
 from prettytable import PrettyTable
-#import mathplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import numpy as np
 
 KEY_COMPARISONS = 0
 records = {}
-table = PrettyTable(["Value of S", "Size of array (N)","Number Of Key Comparisons"])
+table = PrettyTable()
+table.field_names = ["Value of S", "Size of array (N)","Number Of Key Comparisons"]
 
 def generate_random_array(lower_limit, upper_limit):
     arr = []
@@ -71,32 +73,44 @@ def merge(left, right):
 def pause():
     time.sleep(1)
 
-
-
 def main():
     global KEY_COMPARISONS
     
     S = int(input("enter value of S: "))
-    size_of_array = 10
+    size_of_array = 100
     
-    while size_of_array <= 5000:
+    while size_of_array <= 1000000:
         KEY_COMPARISONS = 0
-        print(f"random array generated..",end="\n")
+        #print(f"random array generated..",end="\n")
         arr = generate_random_array(S,size_of_array) 
-        print(arr,end="\n")
+        #print(arr,end="\n")
+   
+        #print("sorting the array...",end="\n")
+        arr = hybrid_sort(arr,S)
 
         
-        print("sorting the array...",end="\n")
-        print(hybrid_sort(arr,S),end="\n")
-
-        
-        #print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
+        # print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
         table.add_row([S,size_of_array,KEY_COMPARISONS])
         
-        size_of_array +=10
+        size_of_array *=10
         
+def plot_graph(table):
+    X = []
+    Y = []
+    
+    for row in table.rows:
+        X.append(row[table.field_names.index("Size of array (N)")])
+        Y.append(row[table.field_names.index("Number Of Key Comparisons")])
+    
+    plt.plot(X,Y)
+    plt.show()
         
 
+    
         
 main()
 print(table)
+plot_graph(table)
+
+
+# obeservations from cheng - changing frequency of the x-axis causes a wave like property, not sure why.
