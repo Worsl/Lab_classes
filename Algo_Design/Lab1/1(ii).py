@@ -77,10 +77,12 @@ def main(): # in this particular implementation, we fix the input size of n, and
     size_of_array = int(input("enter the value of N (Size of array): "))
     S = 1
     
-    while S <= 15:
+
+    while S <= 100:
         KEY_COMPARISONS = 0
-        #print(f"random array generated..",end="\n")
         arr = generate_random_array(size_of_array) 
+        #print(f"random array generated..",end="\n")
+
         #print(arr,end="\n")
    
         #print("sorting the array...",end="\n")
@@ -98,10 +100,17 @@ def plot_graph(table):
     for row in table.rows:
         X.append(row[table.field_names.index("Value of S")])
         Y.append(row[table.field_names.index("Number Of Key Comparisons")])
-    
+
+
     plt.plot(X,Y)
     plt.xlabel("Value of S")
     plt.ylabel("Number of Key Comparisons")
+    ax = plt.gca()
+    ax.get_yaxis().get_major_formatter().set_useOffset(False)
+    ax.get_yaxis().get_major_formatter().set_scientific(False)
+    
+    ax.get_xaxis().get_major_formatter().set_useOffset(False)
+    ax.get_xaxis().get_major_formatter().set_scientific(False)
 
     plt.show()
         
