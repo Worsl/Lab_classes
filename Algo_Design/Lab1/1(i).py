@@ -103,7 +103,7 @@ def main():
         arr = hybrid_sort(arr,S)
 
         
-        # print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
+        #print(f"value of S : {S}, number of key comparisons : {KEY_COMPARISONS} , size of array : {size_of_array}", end="\n" )
         table.add_row([S,size_of_array,KEY_COMPARISONS])
         
         size_of_array *=10
