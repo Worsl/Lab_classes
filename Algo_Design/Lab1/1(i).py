@@ -2,20 +2,20 @@ import random
 import time
 from prettytable import PrettyTable
 import matplotlib.pyplot as plt
-import numpy as np
+
 
 KEY_COMPARISONS = 0
 records = {}
 table = PrettyTable()
 table.field_names = ["Value of S", "Size of array (N)","Number Of Key Comparisons"]
 
-def generate_random_array(size_of_array):
+def generate_random_array(size_of_array)->list[int]:
     arr = []
     for _ in range(0,size_of_array+1):
         arr.append(random.randint(1,size_of_array))
     return arr
 
-def hybrid_sort(arr, S:int): #returns an array sorted
+def hybrid_sort(arr, S:int)->list[int]: #returns an array sorted
     length = len(arr)
     
     if length <= S: #base case to enter insertion sort
@@ -32,7 +32,7 @@ def hybrid_sort(arr, S:int): #returns an array sorted
 
     return merge(left,right)    
   
-def insertion_sort(arr):
+def insertion_sort(arr)->list[int]:
     global KEY_COMPARISONS
     length = len(arr)
     for i in range(1, length):
@@ -44,28 +44,29 @@ def insertion_sort(arr):
                 break
     return arr
 
-def merge(left, right):
+def merge(left, right)->list[int]:
     global KEY_COMPARISONS # need to implement the comparison for part (c)
     
     sorted_array = [] #using an external axuiliary array
     leftIndex,rightIndex = 0,0
     
     while (leftIndex < len(left) or rightIndex < len(right)):
-        if leftIndex == len(left):
-            sorted_array.append(right[rightIndex]);
+        if leftIndex == len(left): #this means that the left is already all checked
+            sorted_array.append(right[rightIndex]) #hence we append the right elemnt and increment the right index by 1
             rightIndex += 1
-        elif rightIndex == len(right):
-            sorted_array.append(left[leftIndex])
+            
+        elif rightIndex == len(right): #this means that the right is already all checked
+            sorted_array.append(left[leftIndex]) #hence we append the left element and increment the left index by 1
             leftIndex += 1
             
-        elif (left[leftIndex] < right[rightIndex]):
-            sorted_array.append(left[leftIndex])
+        elif (left[leftIndex] < right[rightIndex]): #if the element in left is less than the right
+            sorted_array.append(left[leftIndex]) #append the left element, and increment the right element
             leftIndex += 1
-            KEY_COMPARISONS += 1
+            KEY_COMPARISONS += 1 #update key comparisons
         else:
-            sorted_array.append(right[rightIndex]);
-            rightIndex += 1
-            KEY_COMPARISONS += 1
+            sorted_array.append(right[rightIndex]); #if the element in the right is less than the left
+            rightIndex += 1         # append the right element, and increment the left element
+            KEY_COMPARISONS += 1 #update key comparisons
             
     return sorted_array
     
@@ -78,7 +79,7 @@ def main():
     S = int(input("enter value of S: "))
     size_of_array = 1000
     
-    while size_of_array <= 1000000:
+    while size_of_array <= 10000000:
         KEY_COMPARISONS = 0
         #print(f"random array generated..",end="\n")
         arr = generate_random_array(size_of_array) 
@@ -117,6 +118,9 @@ def plot_graph(table):
 main()
 print(table)
 plot_graph(table)
+
+
+
 
 
 # obeservations from cheng - changing frequency of the x-axis causes a wave like property, not sure why.

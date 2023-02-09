@@ -44,28 +44,29 @@ def insertion_sort(arr):
                 break
     return arr
 
-def merge(left, right):
+def merge(left, right)->list[int]:
     global KEY_COMPARISONS # need to implement the comparison for part (c)
     
     sorted_array = [] #using an external axuiliary array
     leftIndex,rightIndex = 0,0
     
     while (leftIndex < len(left) or rightIndex < len(right)):
-        if leftIndex == len(left):
-            sorted_array.append(right[rightIndex]);
+        if leftIndex == len(left): #this means that the left is already all checked
+            sorted_array.append(right[rightIndex]) #hence we append the right elemnt and increment the right index by 1
             rightIndex += 1
-        elif rightIndex == len(right):
-            sorted_array.append(left[leftIndex])
+            
+        elif rightIndex == len(right): #this means that the right is already all checked
+            sorted_array.append(left[leftIndex]) #hence we append the left element and increment the left index by 1
             leftIndex += 1
             
-        elif (left[leftIndex] < right[rightIndex]):
-            sorted_array.append(left[leftIndex])
+        elif (left[leftIndex] < right[rightIndex]): #if the element in left is less than the right
+            sorted_array.append(left[leftIndex]) #append the left element, and increment the right element
             leftIndex += 1
-            KEY_COMPARISONS += 1
+            KEY_COMPARISONS += 1 #update key comparisons
         else:
-            sorted_array.append(right[rightIndex]);
-            rightIndex += 1
-            KEY_COMPARISONS += 1
+            sorted_array.append(right[rightIndex]); #if the element in the right is less than the left
+            rightIndex += 1         # append the right element, and increment the left element
+            KEY_COMPARISONS += 1 #update key comparisons
             
     return sorted_array
     
