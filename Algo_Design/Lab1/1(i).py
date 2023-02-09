@@ -10,12 +10,22 @@ table = PrettyTable()
 table.field_names = ["Value of S", "Size of array (N)","Number Of Key Comparisons"]
 
 def generate_random_array(size_of_array)->list[int]:
+    """_summary_
+
+    generates a random array from a given size. with numbers range of 1 to size_of_array inclusive
+    
+    """
     arr = []
     for _ in range(0,size_of_array+1):
         arr.append(random.randint(1,size_of_array))
     return arr
 
 def hybrid_sort(arr, S:int)->list[int]: #returns an array sorted
+    """_summary_
+
+    a recursive function, uses insertion sort when the length of the array is less than or equal to S.
+    
+    """
     length = len(arr)
     
     if length <= S: #base case to enter insertion sort
@@ -74,6 +84,10 @@ def pause():
     time.sleep(1)
 
 def main():
+    """
+    main function
+    
+    """
     global KEY_COMPARISONS
     
     S = int(input("enter value of S: "))
